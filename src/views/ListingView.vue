@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="green">ListingView</h1>
+        <h1 class="text-5xl">ListingView</h1>
     </div>
 </template>
 <script>
