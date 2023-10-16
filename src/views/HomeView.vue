@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import BaseCard from '@/components/BaseCard.vue'
 
 const token = import.meta.env.VITE_GRAY_TOKEN;
@@ -33,11 +33,13 @@ getMoviesData()
 <template>
   <div class="bg-[url('@/assets/bg-home.jpg')]">
     <div class="mx-auto grid grid-cols-4 gap-5 place-items-end h-56 mb-4 p-5">
-      <template v-for="movie in movies.results.slice(0, 4)" :key="movie.id">
-          <BaseCard 
+      <template v-for="(movie, index) in movies.results" :key="movie.id">
+        <template v-if="index <=3">
+          <BaseCard
           :title="movie.original_title" 
           :imgSrc="getImage(movie.poster_path)"
           :overview="movie.overview" />
+        </template>
       </template>
     </div>
   </div>
