@@ -3,11 +3,6 @@
         <h1 class="text-5xl">ListingView</h1>
     </div>
 </template>
-<script>
-export default {
-    
-}
+<script lang="ts">
+
 </script>
-<style lang="">
-    
-</style>
