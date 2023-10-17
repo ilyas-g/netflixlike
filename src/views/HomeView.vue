@@ -1,9 +1,7 @@
 <script setup lang="ts">
 
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import BaseCard from '@/components/BaseCard.vue'
-
-const token = import.meta.env.VITE_GRAY_TOKEN;
 
 const movies: any = ref({});
 
@@ -16,7 +14,7 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${import.meta.env.VITE_GRAY_TOKEN}`
   }
 };
 
