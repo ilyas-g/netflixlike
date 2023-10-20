@@ -1,24 +1,9 @@
 <script setup lang="ts">
 
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import BaseCard from '@/components/BaseCard.vue'
-
-const token = import.meta.env.VITE_GRAY_TOKEN;
-
+import { options, getImage } from '@/utils/utils.js'
 const movies: any = ref({});
-
-function getImage(imagePath: string) {
-  const baseURL = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
-  return baseURL + imagePath;
-}
-
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${token}`
-  }
-};
 
 async function getMoviesData() {
   const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options);
