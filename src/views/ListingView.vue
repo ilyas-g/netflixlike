@@ -34,7 +34,14 @@ watchEffect(async () => {
         <h1 class="text-5xl">ListingView</h1>
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
           <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-            <BaseTabs v-for="branch in branches" :title="branch.title" :tabNumber="branch.id" @some-event="() => {currentBranch = branch.id}" />
+            <BaseTabs 
+            v-for="branch in branches" 
+            :title="branch.title" 
+            :tabNumber="branch.id" 
+            :active-tab="currentBranch === branch.id ? true : false"
+            @some-event="() => {currentBranch = branch.id}" 
+
+            />
           </ul>
         </div>
         <div class="mx-auto grid grid-cols-4 gap-5 place-items-end h-56 mb-4 p-5">
