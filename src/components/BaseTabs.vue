@@ -11,7 +11,7 @@ import { ref } from 'vue';
 
 export default {
   props: {
-    title: String,
+    title: [String, Number],
     tabNumber: Number
   },
   setup() {
