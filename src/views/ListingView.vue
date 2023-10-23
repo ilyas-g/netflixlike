@@ -4,6 +4,8 @@ import BaseTabs from '@/components/BaseTabs.vue'
 import { options, getImage } from '@/utils/utils.js'
 import { ref, watchEffect} from 'vue';
 
+import { useBookmarksStore } from '@/stores/bookmark'
+
 interface thing {
   id: number,
   title: string
@@ -14,7 +16,7 @@ const branches: thing[] = [
   { id: 16, title: 'Animation' },
   { id: 12, title: 'Aventure' },
   { id: 35, title: 'Comédie' },
-  { id: 99, title: 'Documentaire' }
+  { id: 36, title: 'Histoire' }
 ];
 const currentBranch = ref(branches[0].id)
 const datas:any = ref({})
@@ -27,11 +29,17 @@ watchEffect(async () => {
   )
   datas.value = await response.json()
 })
+
+const bookmark = useBookmarksStore()
 </script>
 
 <template>
     <div>
         <h1 class="text-5xl">ListingView</h1>
+        <div>
+          <h2>List des films dans le tableau</h2>
+          {{ bookmark.userList }}
+        </div>
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
           <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
             <BaseTabs 
@@ -50,7 +58,8 @@ watchEffect(async () => {
         :index="movie.id"
         :title="movie.original_title" 
         :imgSrc="getImage(movie.poster_path)"
-        :overview="movie.overview" />
+        @toggleBookmark="bookmark.toggleMovie(movie.original_title, getImage(movie.poster_path))" 
+        />
       </template>
     </div>
     </div>
