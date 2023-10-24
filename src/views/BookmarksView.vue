@@ -15,15 +15,16 @@
         <button @click="counter.randomizeCounter()">Randomize</button>
 
         <div>{{ bookmark.userList }}</div>
-    <div class="mx-auto grid grid-cols-4 gap-5 place-items-end h-56 mb-4 p-5">
+        <div class="mx-auto grid grid-cols-4 gap-5 place-items-end h-56 mb-4 p-5">
+            <template v-for="(movie) in bookmark.userList" :key="movie.name">
+                <BaseCard
+                :title="movie.name" 
+                :imgSrc="getImage(movie.imgSrc)"
+                @toggleBookmark="bookmark.deleteEvent(movie)" 
 
-        <template v-for="(movie) in bookmark.userList" :key="movie.name">
-            <BaseCard
-          :title="movie.name" 
-          :imgSrc="getImage(movie.imgSrc)"
-          />
-        </template>
-    </div>
+                />
+            </template>
+        </div>
     </div>
 </template>
 <script setup lang="ts">

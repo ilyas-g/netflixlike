@@ -58,7 +58,7 @@ const bookmark = useBookmarksStore()
         :index="movie.id"
         :title="movie.original_title" 
         :imgSrc="getImage(movie.poster_path)"
-        @toggleBookmark="bookmark.toggleMovie(movie.original_title, getImage(movie.poster_path))" 
+        @toggleBookmark="bookmark.addMovie(movie.original_title, getImage(movie.poster_path))" 
         />
       </template>
     </div>

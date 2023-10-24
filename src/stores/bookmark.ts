@@ -15,8 +15,11 @@ export const useBookmarksStore = defineStore('bookmark', {
     }
   },
   actions: {
-    toggleMovie(name, imgSrc) {
+    addMovie(name: string, imgSrc: string) {
       this.userList.push({name, imgSrc})
+    },
+    deleteEvent: function(event: any) {
+      this.userList.splice(this.userList.indexOf(event), 1);
     }
   }
 })
