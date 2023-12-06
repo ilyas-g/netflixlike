@@ -3,6 +3,8 @@
 import { ref } from 'vue';
 import BaseCard from '@/components/BaseCard.vue'
 import { options, getImage } from '@/utils/utils.js'
+import { useBookmarksStore } from '@/stores/bookmark'
+
 const movies: any = ref({});
 
 async function getMoviesData() {
@@ -13,6 +15,9 @@ async function getMoviesData() {
 }
 
 getMoviesData()
+
+const bookmark = useBookmarksStore()
+
 </script>
 
 <template>
@@ -23,7 +28,9 @@ getMoviesData()
           <BaseCard
           :title="movie.original_title" 
           :imgSrc="getImage(movie.poster_path)"
-          :overview="movie.overview" />
+          @toggleBookmark="bookmark.addMovie(movie.original_title, getImage(movie.poster_path))" 
+
+          />
         </template>
       </template>
     </div>
