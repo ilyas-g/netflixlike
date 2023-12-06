@@ -35,11 +35,6 @@ const bookmark = useBookmarksStore()
 
 <template>
     <div>
-        <h1 class="text-5xl">ListingView</h1>
-        <div>
-          <h2>List des films dans le tableau</h2>
-          {{ bookmark.userList }}
-        </div>
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
           <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
             <BaseTabs 
