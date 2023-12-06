@@ -2,7 +2,7 @@ export const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_GRAY_TOKEN}`
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZWU5MTIxM2I2Y2UxZDI5MWMxZDllZDIyMGIzMmU5NiIsInN1YiI6IjVlNTdmNmU0YTkzZDI1MDAxNzUzOTI4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Jh77ZUV9adKPaGsxJbDRw08IlK-kRTS46jJLCDzl9Ek`
     }
   };
 
