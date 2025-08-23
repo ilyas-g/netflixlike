@@ -18,10 +18,10 @@ const branches: thing[] = [
   { id: 35, title: 'Comédie' },
   { id: 36, title: 'Histoire' }
 ];
-const currentBranch = ref(branches[4].id)
+const currentBranch = ref(branches[0].id)
 const datas:any = ref({})
-const pageNumber = ref(2);
-
+const pageNumber = ref(6);
+const limitPage:number = 20 // limité à 500
 
 const API_URL = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc&with_genres=`
 const tf = `&page=`
@@ -34,6 +34,46 @@ watchEffect(async () => {
 })
 
 const bookmark = useBookmarksStore()
+
+
+function shouldShowPageInMenu(page:number) {
+  return (isCurrentPage(page) || isNextOrPreviousPage(page) || isFirstOrLastPage(page))
+}
+
+function isCurrentPage(page:number) {
+  if(page === pageNumber.value) {
+    return true
+  }
+}
+
+function isNextOrPreviousPage(page:number) {
+  const current = pageNumber.value
+	if(page+1 === current || page-1 === current) {
+    return true
+  }
+}
+
+function isFirstOrLastPage(page:number) {
+  if(page === 1 || page === 2 || page === limitPage || page === limitPage-1) {
+    return true
+  }
+}
+
+function previous() {
+  if(pageNumber.value > 1) {
+    pageNumber.value = pageNumber.value - 1
+  }
+}
+
+function next() {
+  if(pageNumber.value < limitPage) {
+    pageNumber.value = pageNumber.value + 1
+  }
+}
+
+
+
+
 </script>
 
 <template>
@@ -45,16 +85,22 @@ const bookmark = useBookmarksStore()
             :title="branch.title" 
             :tabNumber="branch.id" 
             :active-tab="currentBranch === branch.id ? true : false"
-            @some-event="() => {currentBranch = branch.id}" 
+            @some-event="() => {currentBranch = branch.id}"
             />
           </ul>
         </div>
 
-        <div class="pagination" v-for="n in datas.total_pages">
-          <template v-if="n <=500">
-            <button @click="pageNumber = n">{{ n }}</button>
+        <ul class="pagination">
+          <li @click="previous">&laquo;</li>
+          <template v-for="n in datas.total_pages" :key="n">
+            <template v-if="n <=limitPage">
+              <li @click="pageNumber = n"
+              :class="{current: pageNumber === n, hide: !shouldShowPageInMenu(n)}"
+              >{{ n }}</li>
+            </template>
           </template>
-        </div>
+          <li @click="next">&raquo;</li>
+        </ul>
         <div class="mx-auto grid grid-cols-4 gap-5 place-items-end h-56 mb-4 p-5">
       <template v-for="(movie) in datas.results" :key="movie.id">
         <BaseCard
