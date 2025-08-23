@@ -10,7 +10,7 @@ const movies: any = ref({});
 async function getMoviesData() {
   const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options);
   const finalRes = await res.json();
-  console.log(finalRes);
+  console.log(finalRes.results);
   movies.value = finalRes;
 }
 

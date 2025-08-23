@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination button {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination button:hover:not(.active) {background-color: #ddd; color: #222222;}
